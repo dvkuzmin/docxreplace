@@ -3,13 +3,13 @@ import win32api, win32con
 import docx
 import re
 
-def file_is_hidden(p):
+def file_is_hidden(p): # Эта функция проверяет, является ли файл или папка скрытой
     if os.name=='nt':
         attribute = win32api.GetFileAttributes(p)
         return attribute & (win32con.FILE_ATTRIBUTE_HIDDEN | win32con.FILE_ATTRIBUTE_SYSTEM)
 
 
-def searching_files(path, pattern, new_text):
+def searching_files(path, pattern, new_text): # Эта функция рекурсивно ищет файлы с расширением .docx
 	file_list = [f for f in os.listdir(path) if not file_is_hidden(os.path.join(path, f))]
 	for i in file_list:
 		if os.path.isdir(os.path.join(path, i)):
@@ -18,7 +18,7 @@ def searching_files(path, pattern, new_text):
 			replace_pattern(os.path.join(path, i), pattern, new_text)
 
 
-def replace_pattern(file, pattern=r'', new_text=''):
+def replace_pattern(file, pattern=r'', new_text=''): # Эта функция позволяет поменять ваш искомый шаблон на новый текст 
 	doc = docx.Document(file)
 	for paragraph in doc.paragraphs:
 		paragraph.text = re.sub(pattern, new_text, paragraph.text)

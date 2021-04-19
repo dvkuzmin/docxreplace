@@ -1,3 +1,6 @@
+# В этом модуле с помощью библиотеки TKinter мы создаем простейшее графическое приложение для более удобного
+# использования скрипта
+
 from tkinter import *
 from tkinter import filedialog
 import docx_replace as d
